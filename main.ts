@@ -79,20 +79,20 @@ namespace matrixmicro {
     //% block="Stop"
     A3 = 3
 	}
-  //%block="move Motor at port %mpt %apt|value %number"
-	export function move_motor_port(mpt: Motor_port = 1, apt: Motor_state = 1, usevalue: number): void {
-		if (usevalue > 100)usevalue = 100
-		if (usevalue < 0)usevalue = 0
-    usevalue = Math.map(usevalue, 0, 100, 0, 4095)
+  //%block="Micro DC Motor %mpt %apt|Speed %number"
+	export function microMotor(mpt: Motor_port = 1, apt: Motor_state = 1, speed: number): void {
+		if (speed > 100)speed = 100
+		if (speed < 0)speed = 0
+    speed = Math.map(speed, 0, 100, 0, 4095)
 
     if (mpt == 1) {
       if (apt == 1) {
-        motor(11, usevalue)
+        motor(11, speed)
         motor(13, 4095)
         motor(14, 0)
       }
       else if (apt == 2) {
-        motor(11, usevalue)
+        motor(11, speed)
         motor(13, 0)
         motor(14, 4095)
       }
@@ -103,12 +103,12 @@ namespace matrixmicro {
       }
     } else {
       if (apt == 1) {
-        motor(12, usevalue)
+        motor(12, speed)
         motor(15, 4095)
-          motor(16, 0)
+        motor(16, 0)
       }
       else if (apt == 2) {
-        motor(12, usevalue)
+        motor(12, speed)
         motor(15, 0)
         motor(16, 4095)
       }
