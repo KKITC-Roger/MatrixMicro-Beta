@@ -1,4 +1,4 @@
-# MatrixMicro-Neta
+# MatrixMicro-Beta
 
 Makecode extension for Matrix Micro
 
