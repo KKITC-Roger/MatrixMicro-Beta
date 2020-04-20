@@ -177,5 +177,52 @@ namespace matrixmicro {
       }
     return AP
   }
+  export enum Nu{
+    //% block="D1"
+    UPort1 = 1,
+    //% block="D2"
+    UPort2 = 2,
+    //% block="A1"
+    UPort3 = 3,
+    //% block="A2"
+    UPort4 = 4,
+  }
+  /**
+  * Micro Ultrasonic Sensor
+  */
+  //% blockId=ultrasonicSensor block="Micro Ultrasonic Sensor port %nu"
+  //% weight=10
+  export function Me_Ultrasonic_Sensor(nu: Nu): number {
+    let pinT = DigitalPin.P0
+    let pinE = DigitalPin.P1
+    switch (nu) {
+      case 1:
+        pinT = DigitalPin.P12
+        pinE = DigitalPin.P13
+        break;
+      case 2:
+        pinT = DigitalPin.P14
+        pinE = DigitalPin.P15
+        break;
+      case 3:
+        pinT = DigitalPin.P0
+        pinE = DigitalPin.P1
+        break;
+      case 4:
+        pinT = DigitalPin.P2
+        pinE = DigitalPin.P3
+        break;
+    }
+    // send pulse
+    pins.setPull(pinT, PinPullMode.PullNone);
+    pins.digitalWritePin(pinT, 0);
+    control.waitMicros(2);
+    pins.digitalWritePin(pinT, 1);
+    control.waitMicros(10);
+    pins.digitalWritePin(pinT, 0);
 
+    // read pulse
+    let d = pins.pulseIn(pinE, PulseValue.High, 23000);  // 8 / 340 =
+    return d * 5 / 3 / 58;
+  }
 }
