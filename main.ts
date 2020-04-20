@@ -167,12 +167,12 @@ namespace matrixmicro {
   //% blockGap=2 weight=96
   export function ARead(na: Na): number{
     let AP = 0
-    switch(nd){
+    switch(na){
       case 1:
-        AP = pins.analogReadPin(DigitalPin.P0)
+        AP = pins.analogReadPin(AnalogPin.P0)
         break;
       case 2:
-        AP = pins.analogReadPin(DigitalPin.P2)
+        AP = pins.analogReadPin(AnalogPin.P2)
         break;
       }
     return AP
