@@ -1,0 +1,8 @@
+{
+    "matrixmicro|block": "工具",
+    "matrixmicro.areaOfRectangle|block": "長方形面積 長 %length|寬 %width",
+    "matrixmicro.ledOfRectangle|block": "LED顯示長方形面積 長 %length|寬 %width",
+    "matrixmicro.motor|block":"Micro 直流馬達 %nm|速度 %speed",
+    "matrixmicro.servo|block":"Micro 伺服馬達 %ns|角度 %angle",
+    "matrixmicro.microButtonState|block":" %nb| 按下?",    
+}

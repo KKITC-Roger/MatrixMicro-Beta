@@ -1,0 +1,15 @@
+{
+    "name": "matrixmicro-Beta",
+    "version": "1.0.1",
+    "description": "Makecode extension for Matrix Micro!",
+    "public": true,
+    "license": "MIT",
+        "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts",
+        "_locales/zh/MatrixMicro-Beta-strings.json"
+    ]
+}

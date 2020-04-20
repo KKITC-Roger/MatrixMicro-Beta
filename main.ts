@@ -1,0 +1,156 @@
+//% weight=0 color=#0066CC icon="\uf2db" block="Micro"
+namespace matrixmicro {
+
+  pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
+  pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
+
+  let K = 4096 / 20
+	let StartBit = 0.5 * K
+	let FullScaleBit = 1.94 * K
+
+  function init() {
+  	pins.i2cWriteNumber(64, 16, NumberFormat.Int16BE, false)
+  	pins.i2cWriteNumber(64, 254 * 256 + 123, NumberFormat.Int16BE, false)
+  	pins.i2cWriteNumber(64, 0, NumberFormat.Int16BE, false)
+  }
+
+  init()
+  /**
+  * Button menu
+  */
+  export enum Nbtn{
+    //% block="Button 1"
+    BTN1 = 1,
+    //% block="Button 2"
+    BTN2 = 2,
+  }
+  /**
+  * Button state
+  * Detect the button is pressed or not
+  */
+  //% blockID="microButtonState"  block="Micro %nb| press?"
+  //% blockGap=2 weight=97
+  export function button(nb: Nbtn): number{
+    let PUpin = 0
+    switch (nb) {
+      case 1: PUpin = pins.digitalReadPin(DigitalPin.P5)
+        break;
+      case 2: PUpin = pins.digitalReadPin(DigitalPin.P11)
+        break;
+    }
+    return PUpin
+  }
+
+  export enum Nservo{
+    //% block="Servo1"
+    SPort1 = 1,
+    //% block="Servo2"
+    Sport2 = 2,
+  }
+  /**
+  * Servo movement
+  * choose one of the servo and set the angle.
+  */
+  //% blockID="microServo"  block="Micro RC Motor %ns|Angle %angle"
+  //% blockGap=2 weight=98
+  export function servo(ns: Nservo, angle: number): void{
+    if(angle>180)angle = 180
+    if(angle<0)angle = 0
+    let TS1 = (angle / 180 * FullScaleBit + StartBit) % 256
+  	let TS2 = (angle / 180 * FullScaleBit + StartBit) / 256
+  	let CH = (ns - 1) * 4 + 8
+  	pins.i2cWriteNumber(64, CH * 256 + TS1, NumberFormat.Int16BE, false)
+  	pins.i2cWriteNumber(64, (CH + 1) * 256 + TS2, NumberFormat.Int16BE, false)
+  }
+
+
+
+  export enum Motor_port {
+	  //% block="M1"
+	  M1 = 1,
+    //% block="M2"
+    M2 = 2
+	}
+  export enum Motor_state {
+	  //% block="Forward"
+	  A1 = 1,
+    //% block="Reverse"
+    A2 = 2,
+    //% block="Stop"
+    A3 = 3
+	}
+  //%block="move Motor at port %mpt %apt|value %number"
+	export function move_motor_port(mpt: Motor_port = 1, apt: Motor_state = 1, usevalue: number): void {
+		if (usevalue > 100)usevalue = 100
+		if (usevalue < 0)usevalue = 0
+    usevalue = Math.map(usevalue, 0, 100, 0, 4095)
+
+    if (mpt == 1) {
+      if (apt == 1) {
+        motor(11, usevalue)
+        motor(13, 4095)
+        motor(14, 0)
+      }
+      else if (apt == 2) {
+        motor(11, usevalue)
+        motor(13, 0)
+        motor(14, 4095)
+      }
+      else {
+        motor(11, 0)
+        motor(13, 0)
+        motor(14, 0)
+      }
+    } else {
+      if (apt == 1) {
+        motor(12, usevalue)
+        motor(15, 4095)
+          motor(16, 0)
+      }
+      else if (apt == 2) {
+        motor(12, usevalue)
+        motor(15, 0)
+        motor(16, 4095)
+      }
+      else {
+        motor(12, 0)
+        motor(15, 0)
+        motor(16, 0)
+      }
+    }
+  }
+  function motor(Spin: number, Speed: number) {
+		let TM1 = Speed % 256
+		let TM2 = Speed / 256
+		let CH = (Spin - 1) * 4 + 8
+		pins.i2cWriteNumber(64, CH * 256 + TM1, NumberFormat.Int16BE, false)
+		pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
+	}
+
+
+  export enum Nd{
+    //% block="D1"
+    DPort1 = 1,
+    //% block="D2"
+    DPort2 = 2,
+  }
+  /**
+  * Digital Read
+  * Read digital port.
+  */
+  //% blockID="microDIGRead"  block="Micro Digital port %nd"
+  //% blockGap=2 weight=96
+  export function DRead(nd: Nd): number{
+    let DP = 0
+    switch(nd){
+      case 1:
+        DP = pins.digitalReadPin(DigitalPin.P12)
+        break;
+      case 2:
+        DP = pins.digitalReadPin(DigitalPin.P14)
+        break;
+      }
+    return DP
+  }
+  
+}
