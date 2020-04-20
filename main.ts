@@ -15,7 +15,6 @@ namespace matrixmicro {
   }
 
   init()
-  create()
   /**
   * Button menu
   */
@@ -450,8 +449,8 @@ namespace matrixmicro {
    * @param pin the pin where the neopixel is connected.
    * @param numleds number of leds in the strip, eg: 24,30,60,64
    */
-  //% blockId="neopixel_create" block="NeoPixel at pin %pin|with %numleds|leds as %mode"
-  //% weight=90 blockGap=8
+  //% blockId="neopixel_create" block="NeoPixel"
+  //% weight=90 blockGap=2
   //% parts="neopixel"
   //% trackArgs=0,2
   //% blockSetVariable=strip
@@ -556,5 +555,6 @@ namespace matrixmicro {
       Shortest
   }
 
+  create()
 
 }
