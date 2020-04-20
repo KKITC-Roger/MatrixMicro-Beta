@@ -464,7 +464,7 @@ namespace matrixmicro {
       strip._mode = NeoPixelMode.RGB;
       strip._matrixWidth = 0;
       strip.setBrightness(128)
-      strip.setPin(pin)
+      strip.setPin(DigitalPin.P8)
       return strip;
   }
 
