@@ -152,5 +152,30 @@ namespace matrixmicro {
       }
     return DP
   }
-  
+
+  export enum Na{
+    //% block="A1"
+    APort1 = 1,
+    //% block="A2"
+    APort2 = 2,
+  }
+  /**
+  * Analog Read
+  * Read analog port.
+  */
+  //% blockID="microANGRead"  block="Micro Analog port %na"
+  //% blockGap=2 weight=96
+  export function ARead(na: Na): number{
+    let AP = 0
+    switch(nd){
+      case 1:
+        AP = pins.analogReadPin(DigitalPin.P0)
+        break;
+      case 2:
+        AP = pins.analogReadPin(DigitalPin.P2)
+        break;
+      }
+    return AP
+  }
+
 }
