@@ -15,6 +15,7 @@ namespace matrixmicro {
   }
 
   init()
+  create()
   /**
   * Button menu
   */
@@ -454,13 +455,13 @@ namespace matrixmicro {
   //% parts="neopixel"
   //% trackArgs=0,2
   //% blockSetVariable=strip
-  private function create(pin: DigitalPin, numleds: number, mode: NeoPixelMode): Strip {
+  private function create(): Strip {
       let strip = new Strip();
       let stride = mode === NeoPixelMode.RGB;
       strip.buf = pins.createBuffer(2 * stride);
       strip.start = 0;
       strip._length = 2;
-      strip._mode = mode;
+      strip._mode = NeoPixelMode.RGB;
       strip._matrixWidth = 0;
       strip.setBrightness(128)
       strip.setPin(pin)
