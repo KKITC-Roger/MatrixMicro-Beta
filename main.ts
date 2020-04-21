@@ -223,9 +223,7 @@ namespace matrixmicro {
 
     // read pulse
     let d = pins.pulseIn(pinE, PulseValue.High, 23000);  // 8 / 340 =
-    return d * 5 / 3 / 58;
+    return d * 0.017;
   }
-
-
 
 }
