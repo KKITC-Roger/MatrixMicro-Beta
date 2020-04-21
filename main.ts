@@ -182,10 +182,6 @@ namespace matrixmicro {
     UPort1 = 1,
     //% block="D2"
     UPort2 = 2,
-    //% block="A1"
-    UPort3 = 3,
-    //% block="A2"
-    UPort4 = 4,
   }
   /**
   * Micro Ultrasonic Sensor
@@ -203,14 +199,6 @@ namespace matrixmicro {
       case 2:
         pinT = DigitalPin.P14
         pinE = DigitalPin.P15
-        break;
-      case 3:
-        pinT = DigitalPin.P0
-        pinE = DigitalPin.P1
-        break;
-      case 4:
-        pinT = DigitalPin.P2
-        pinE = DigitalPin.P3
         break;
     }
     // send pulse
