@@ -1,6 +1,5 @@
 //% weight=0 color=#0066CC icon="\uf2db" block="Micro"
 namespace matrixmicro {
-
   pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
   pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
 
@@ -9,10 +8,7 @@ namespace matrixmicro {
   	pins.i2cWriteNumber(64, 254 * 256 + 3, NumberFormat.Int16BE, false)
   	pins.i2cWriteNumber(64, 0, NumberFormat.Int16BE, false)
   }
-
   init()
-
-
   export enum Motor_port {
 	  //% block="M1"
 	  M1 = 1,
@@ -27,7 +23,8 @@ namespace matrixmicro {
     //% block="Stop"
     A3 = 3
 	}
-    //%block="Micro DC Motor %mpt %apt|Speed %number"
+  //%block="Micro DC Motor %mpt %apt|Speed %number"
+  //%weight=99
 	export function microMotor(mpt: Motor_port = 1, apt: Motor_state = 1, speed: number): void {
 		if (speed > 100)speed = 100
 		if (speed < 0)speed = 0
@@ -111,12 +108,12 @@ namespace matrixmicro {
   * Read analog port.
   */
   //% blockID="microANGRead"  block="Micro Analog port %na"
-  //% blockGap=2 weight=96
+  //% blockGap=2 weight=95
   export function ARead(na: Na): number{
     let AP = 0
     switch(na){
       case 1:
-        AP = pins.analogReadPin(AnalogPin.P0)
+        AP = pins.analogReadPin(AnalogPin.P1)
         break;
       case 2:
         AP = pins.analogReadPin(AnalogPin.P2)
@@ -134,7 +131,7 @@ namespace matrixmicro {
   * Micro Ultrasonic Sensor
   */
   //% blockId=ultrasonicSensor block="Micro Ultrasonic Sensor port %nu"
-  //% weight=10
+  //% weight=94
   export function microUltrasonicSensor(nu: Nu): number {
     let pinT = DigitalPin.P0
     let pinE = DigitalPin.P1
@@ -169,7 +166,7 @@ namespace matrixmicro {
 		S2 = 2,
 	}
   //%block="Micro RGB Led port %seport R %number1 G %number2 B %number3"
-  //%blockId=rgbled
+  //%blockId=rgbled weight=97
   export function rgb_led(seport: Led_port, r: number = 0, g:number = 0, b: number = 0): void {
     if (r > 100)r = 100
     if (r < 0)r = 0
@@ -196,6 +193,7 @@ namespace matrixmicro {
     //% block="Servo2"
     Sport2 = 2,
   }
+
   /**
   * Servo movement
   * choose one of the servo and set the angle.
@@ -215,8 +213,6 @@ namespace matrixmicro {
     // let CH = (ns - 1) * 4 + 8
     // pins.i2cWriteNumber(64, CH * 256 + TS1, NumberFormat.Int16BE, false)
     // pins.i2cWriteNumber(64, (CH + 1) * 256 + TS2, NumberFormat.Int16BE, false)
-
-
   }
   namespace servos {
     //% fixedInstances
