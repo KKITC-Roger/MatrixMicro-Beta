@@ -198,7 +198,7 @@ namespace matrixmicro {
 		//% block="RGB2"
 		S2 = 2,
 	}
-  //%block="RGB Led at port %seport |R %number1 |G %number2 |B %number3"
+  //%block="RGB Led at port %seport R %number1 G %number2 B %number3"
   //%blockId=rgbled
   //%weight=12
   export function rgb_led(seport: Led_port = 1, r: number = 0, g:number = 0, b: number = 0): void {
@@ -215,7 +215,8 @@ namespace matrixmicro {
       led(1, r)
       led(2, g)
       led(3, b)
-    }else if (seport = 2) {
+    }
+    if (seport = 2) {
       led(4, r)
       led(5, g)
       led(6, b)
@@ -234,82 +235,82 @@ namespace matrixmicro {
         this._maxAngle = 180;
         this._stopOnNeutral = false;
       }
-    private clampDegrees(degrees: number): number {
-      degrees = degrees | 0;
-      degrees = Math.clamp(this._minAngle, this._maxAngle, degrees);
-      return degrees;
-    }
+      private clampDegrees(degrees: number): number {
+        degrees = degrees | 0;
+        degrees = Math.clamp(this._minAngle, this._maxAngle, degrees);
+        return degrees;
+      }
 
-    /**
-    * Set the servo angle
-    */
-    //% weight=100 help=servos/set-angle
-    //% blockId=servoservosetangle block="set %servo angle to %degrees=protractorPicker °"
-    //% degrees.defl=90
-    //% servo.fieldEditor="gridpicker"
-    //% servo.fieldOptions.width=220
-    //% servo.fieldOptions.columns=2
-    //% blockGap=8
-    //% parts=microservo trackArgs=0
-    //% group="Positional"
-    setAngle(degrees: number) {
-      degrees = this.clampDegrees(degrees);
-      this.internalSetAngle(degrees);
-    }
+      /**
+      * Set the servo angle
+      */
+      //% weight=100 help=servos/set-angle
+      //% blockId=servoservosetangle block="set %servo angle to %degrees=protractorPicker °"
+      //% degrees.defl=90
+      //% servo.fieldEditor="gridpicker"
+      //% servo.fieldOptions.width=220
+      //% servo.fieldOptions.columns=2
+      //% blockGap=8
+      //% parts=microservo trackArgs=0
+      //% group="Positional"
+      setAngle(degrees: number) {
+        degrees = this.clampDegrees(degrees);
+        this.internalSetAngle(degrees);
+      }
 
-    protected internalSetAngle(angle: number): void {
-    }
-    /**
-    * Gets the minimum angle for the servo
-    */
-    public get minAngle() {
-      return this._minAngle;
-    }
+      protected internalSetAngle(angle: number): void {
+      }
+      /**
+      * Gets the minimum angle for the servo
+      */
+      public get minAngle() {
+        return this._minAngle;
+      }
 
-    /**
-    * Gets the maximum angle for the servo
-    */
-    public get maxAngle() {
-      return this._maxAngle;
-    }
+      /**
+      * Gets the maximum angle for the servo
+      */
+      public get maxAngle() {
+        return this._maxAngle;
+      }
 
-    /**
-     * Set the possible rotation range angles for the servo between 0 and 180
-     * @param minAngle the minimum angle from 0 to 90
-     * @param maxAngle the maximum angle from 90 to 180
-     */
-    //% help=servos/set-range
-    //% blockId=servosetrange block="set %servo range from %minAngle to %maxAngle"
-    //% minAngle.min=0 minAngle.max=90
-    //% maxAngle.min=90 maxAngle.max=180 maxAngle.defl=180
-    //% servo.fieldEditor="gridpicker"
-    //% servo.fieldOptions.width=220
-    //% servo.fieldOptions.columns=2
-    //% parts=microservo trackArgs=0
-    //% group="Configuration"
-    //% blockGap=8
-    public setRange(minAngle: number, maxAngle: number) {
-      this._minAngle = Math.max(0, Math.min(90, minAngle | 0));
-      this._maxAngle = Math.max(90, Math.min(180, maxAngle | 0));
-    }
+      /**
+       * Set the possible rotation range angles for the servo between 0 and 180
+       * @param minAngle the minimum angle from 0 to 90
+       * @param maxAngle the maximum angle from 90 to 180
+       */
+      //% help=servos/set-range
+      //% blockId=servosetrange block="set %servo range from %minAngle to %maxAngle"
+      //% minAngle.min=0 minAngle.max=90
+      //% maxAngle.min=90 maxAngle.max=180 maxAngle.defl=180
+      //% servo.fieldEditor="gridpicker"
+      //% servo.fieldOptions.width=220
+      //% servo.fieldOptions.columns=2
+      //% parts=microservo trackArgs=0
+      //% group="Configuration"
+      //% blockGap=8
+      public setRange(minAngle: number, maxAngle: number) {
+        this._minAngle = Math.max(0, Math.min(90, minAngle | 0));
+        this._maxAngle = Math.max(90, Math.min(180, maxAngle | 0));
+      }
 
-    /**
-     * Set a servo stop mode so it will stop when the rotation angle is in the neutral position, 90 degrees.
-     * @param on true to enable this mode
-     */
-    //% help=servos/set-stop-on-neutral
-    //% blockId=servostoponneutral block="set %servo stop on neutral %enabled"
-    //% enabled.shadow=toggleOnOff
-    //% group="Configuration"
-    //% blockGap=8
-    //% servo.fieldEditor="gridpicker"
-    //% servo.fieldOptions.width=220
-    //% servo.fieldOptions.columns=2
-    public setStopOnNeutral(enabled: boolean) {
-      this._stopOnNeutral = enabled;
-    }
+      /**
+       * Set a servo stop mode so it will stop when the rotation angle is in the neutral position, 90 degrees.
+       * @param on true to enable this mode
+       */
+      //% help=servos/set-stop-on-neutral
+      //% blockId=servostoponneutral block="set %servo stop on neutral %enabled"
+      //% enabled.shadow=toggleOnOff
+      //% group="Configuration"
+      //% blockGap=8
+      //% servo.fieldEditor="gridpicker"
+      //% servo.fieldOptions.width=220
+      //% servo.fieldOptions.columns=2
+      public setStopOnNeutral(enabled: boolean) {
+        this._stopOnNeutral = enabled;
+      }
 
-    protected internalStop() { }
+      protected internalStop() { }
     }
 
     export class PinServo extends Servo {
