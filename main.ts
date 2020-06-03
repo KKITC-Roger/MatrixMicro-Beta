@@ -205,6 +205,11 @@ namespace matrixmicro {
   export function servo(ns: Nservo, angle: number): void{
     if(angle>180)angle = 180
     if(angle<0)angle = 0
+    if (ns == 1) {
+      pins.servoWritePin(AnalogPin.P8, angle)
+    }else if(ns == 2){
+      pins.servoWritePin(AnalogPin.P16, angle)
+    }
     // let TS1 = (angle / 180 * FullScaleBit + StartBit) % 256
     // let TS2 = (angle / 180 * FullScaleBit + StartBit) / 256
     // let CH = (ns - 1) * 4 + 8
