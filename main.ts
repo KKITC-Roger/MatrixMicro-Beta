@@ -62,9 +62,6 @@ namespace matrixmicro {
   	pins.i2cWriteNumber(64, CH * 256 + TS1, NumberFormat.Int16BE, false)
   	pins.i2cWriteNumber(64, (CH + 1) * 256 + TS2, NumberFormat.Int16BE, false)
   }
-
-
-
   export enum Motor_port {
 	  //% block="M1"
 	  M1 = 1,
@@ -79,7 +76,7 @@ namespace matrixmicro {
     //% block="Stop"
     A3 = 3
 	}
-  //%block="Micro DC Motor %mpt %apt|Speed %number"
+    //%block="Micro DC Motor %mpt %apt|Speed %number"
 	export function microMotor(mpt: Motor_port = 1, apt: Motor_state = 1, speed: number): void {
 		if (speed > 100)speed = 100
 		if (speed < 0)speed = 0
@@ -126,7 +123,6 @@ namespace matrixmicro {
 		pins.i2cWriteNumber(64, CH * 256 + TM1, NumberFormat.Int16BE, false)
 		pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
 	}
-
 
   export enum Nd{
     //% block="D1"
@@ -213,6 +209,7 @@ namespace matrixmicro {
     let d = pins.pulseIn(pinE, PulseValue.High, 23000);  // 8 / 340 =
     return d * 0.017;
   }
+
   function led(Spin: number, Speed: number) {
     let TM1 = Speed % 256
     let TM2 = Speed / 256
@@ -226,8 +223,8 @@ namespace matrixmicro {
 		//% block="RGB2"
 		S2 = 2,
 	}
-  //%block="rgb led at port %seport |R %number|G %number|B %number"
-  export function rgb_led_pin(seport: Led_port = 1, R: number = 0, G: number = 0, B: number = 0): void {
+  //%block="RGB Led at port %seport R %number|G %number|B %number"
+  export function rgb_led(seport: Led_port = 1, R: number = 0, G: number = 0, B: number = 0): void {
     if (R > 100)R = 100
     if (R < 0)R = 0
     if (G > 100)G = 100
