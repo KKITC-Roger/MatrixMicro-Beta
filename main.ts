@@ -10,7 +10,7 @@ namespace matrixmicro {
 
   function init() {
   	pins.i2cWriteNumber(64, 16, NumberFormat.Int16BE, false)
-  	pins.i2cWriteNumber(64, 254 * 256 + 123, NumberFormat.Int16BE, false)
+  	pins.i2cWriteNumber(64, 254 * 256 + 3, NumberFormat.Int16BE, false)
   	pins.i2cWriteNumber(64, 0, NumberFormat.Int16BE, false)
   }
 
@@ -198,7 +198,9 @@ namespace matrixmicro {
 		//% block="RGB2"
 		S2 = 2,
 	}
-  //%block="RGB Led at port %seport R %number G %number B %number"
+  //%block="RGB Led at port %seport |R %number1 |G %number2 |B %number3"
+  //%blockId=rgbled
+  //%weight=12
   export function rgb_led(seport: Led_port = 1, r: number = 0, g:number = 0, b: number = 0): void {
     if (r > 100)r = 100
     if (r < 0)r = 0
