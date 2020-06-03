@@ -213,6 +213,34 @@ namespace matrixmicro {
     let d = pins.pulseIn(pinE, PulseValue.High, 23000);  // 8 / 340 =
     return d * 0.017;
   }
+  function led(Spin: number, Speed: number) {
+    let TM1 = Speed % 256
+    let TM2 = Speed / 256
+    let CH = (Spin - 1) * 4 + 8
+    pins.i2cWriteNumber(64, CH * 256 + TM1, NumberFormat.Int16BE, false)
+    pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
+  }
+  export enum Led_port {
+		//% block="S1"
+		S1 = 1,
+		//% block="S2"
+		S2 = 2,
+    //% block="S3"
+		S3 = 3,
+		//% block="S4"
+		S4 = 4,
+    //% block="S5"
+		S5 = 5,
+		//% block="S6"
+		S6 = 6
+	}
+  //%block="rgb led at pin %sepin |to %number|degrees"
+  export function rgb_led_pin(sepin: Led_port = 1, usevalue: number): void {
+    if (usevalue > 100)usevalue = 100
+    if (usevalue < 0)usevalue = 0
+    usevalue = Math.map(usevalue, 0, 100, 0, 4095)
+	  led(sepin, usevalue)
+  }
 
   namespace servos {
       //% fixedInstances
