@@ -221,25 +221,31 @@ namespace matrixmicro {
     pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
   }
   export enum Led_port {
-		//% block="S1"
+		//% block="RGB1"
 		S1 = 1,
-		//% block="S2"
+		//% block="RGB2"
 		S2 = 2,
-    //% block="S3"
-		S3 = 3,
-		//% block="S4"
-		S4 = 4,
-    //% block="S5"
-		S5 = 5,
-		//% block="S6"
-		S6 = 6
 	}
-  //%block="rgb led at pin %sepin |to %number|degrees"
-  export function rgb_led_pin(sepin: Led_port = 1, usevalue: number): void {
-    if (usevalue > 100)usevalue = 100
-    if (usevalue < 0)usevalue = 0
-    usevalue = Math.map(usevalue, 0, 100, 0, 4095)
-	  led(sepin, usevalue)
+  //%block="rgb led at port %seport |to %number|%number|%number"
+  export function rgb_led_pin(seport: Led_port = 1, R: number, G: number, B: number): void {
+    if (R > 100)R = 100
+    if (R < 0)R = 0
+    if (G > 100)G = 100
+    if (G < 0)G = 0
+    if (B > 100)B = 100
+    if (B < 0)B = 0
+    R = Math.map(R, 0, 100, 0, 4095)
+    G = Math.map(G, 0, 100, 0, 4095)
+    B = Math.map(B, 0, 100, 0, 4095)
+	  if (seport = 1) {
+      led(1, R)
+      led(2, G)
+      led(3, B)
+    }else if (seport = 2) {
+      led(4, R)
+      led(5, G)
+      led(6, B)
+    }
   }
 
   namespace servos {
