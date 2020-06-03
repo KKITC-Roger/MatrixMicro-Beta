@@ -214,8 +214,7 @@ namespace matrixmicro {
       led(1, r)
       led(2, g)
       led(3, b)
-    }
-    if (seport = 2) {
+    }else (seport = 2) {
       led(4, r)
       led(5, g)
       led(6, b)
