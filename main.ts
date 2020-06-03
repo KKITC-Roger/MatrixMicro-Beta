@@ -4,10 +4,6 @@ namespace matrixmicro {
   pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
   pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
 
-  let K = 4096 / 20
-	let StartBit = 0.5 * K
-	let FullScaleBit = 1.94 * K
-
   function init() {
   	pins.i2cWriteNumber(64, 16, NumberFormat.Int16BE, false)
   	pins.i2cWriteNumber(64, 254 * 256 + 3, NumberFormat.Int16BE, false)
@@ -16,27 +12,7 @@ namespace matrixmicro {
 
   init()
 
-  export enum Nservo{
-    //% block="Servo1"
-    SPort1 = 1,
-    //% block="Servo2"
-    Sport2 = 2,
-  }
-  /**
-  * Servo movement
-  * choose one of the servo and set the angle.
-  */
-  //% blockID="microServo"  block="Micro RC Motor %ns|Angle %angle"
-  //% blockGap=2 weight=98
-  export function servo(ns: Nservo, angle: number): void{
-    if(angle>180)angle = 180
-    if(angle<0)angle = 0
-    let TS1 = (angle / 180 * FullScaleBit + StartBit) % 256
-  	let TS2 = (angle / 180 * FullScaleBit + StartBit) / 256
-  	let CH = (ns - 1) * 4 + 8
-  	pins.i2cWriteNumber(64, CH * 256 + TS1, NumberFormat.Int16BE, false)
-  	pins.i2cWriteNumber(64, (CH + 1) * 256 + TS2, NumberFormat.Int16BE, false)
-  }
+
   export enum Motor_port {
 	  //% block="M1"
 	  M1 = 1,
@@ -192,7 +168,7 @@ namespace matrixmicro {
 		//% block="RGB2"
 		S2 = 2,
 	}
-  //%block="RGB Led at port %seport R %number1 G %number2 B %number3"
+  //%block="Micro RGB Led port %seport R %number1 G %number2 B %number3"
   //%blockId=rgbled
   export function rgb_led(seport: Led_port, r: number = 0, g:number = 0, b: number = 0): void {
     if (r > 100)r = 100
@@ -208,13 +184,35 @@ namespace matrixmicro {
       setpwm(1, r)
       setpwm(2, g)
       setpwm(3, b)
-    }else (seport == 2){
+    }else if(seport == 2){
       setpwm(4, r)
       setpwm(5, g)
       setpwm(6, b)
     }
   }
+  export enum Nservo{
+    //% block="Servo1"
+    SPort1 = 1,
+    //% block="Servo2"
+    Sport2 = 2,
+  }
+  /**
+  * Servo movement
+  * choose one of the servo and set the angle.
+  */
+  //% blockID="microServo"  block="Micro RC Motor %ns|Angle %angle"
+  //% blockGap=2 weight=98
+  export function servo(ns: Nservo, angle: number): void{
+    if(angle>180)angle = 180
+    if(angle<0)angle = 0
+    // let TS1 = (angle / 180 * FullScaleBit + StartBit) % 256
+    // let TS2 = (angle / 180 * FullScaleBit + StartBit) / 256
+    // let CH = (ns - 1) * 4 + 8
+    // pins.i2cWriteNumber(64, CH * 256 + TS1, NumberFormat.Int16BE, false)
+    // pins.i2cWriteNumber(64, (CH + 1) * 256 + TS2, NumberFormat.Int16BE, false)
 
+
+  }
   namespace servos {
     //% fixedInstances
     export class Servo {
