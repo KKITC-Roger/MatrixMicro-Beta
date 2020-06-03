@@ -226,8 +226,8 @@ namespace matrixmicro {
 		//% block="RGB2"
 		S2 = 2,
 	}
-  //%block="rgb led at port %seport |to %number|%number|%number"
-  export function rgb_led_pin(seport: Led_port = 1, R: number, G: number, B: number): void {
+  //%block="rgb led at port %seport |R %number|G %number|B %number"
+  export function rgb_led_pin(seport: Led_port = 1, R: number = 0, G: number = 0, B: number = 0): void {
     if (R > 100)R = 100
     if (R < 0)R = 0
     if (G > 100)G = 100
