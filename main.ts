@@ -204,11 +204,11 @@ namespace matrixmicro {
     r = Math.map(r, 0, 100, 0, 4095)
     g = Math.map(g, 0, 100, 0, 4095)
     b = Math.map(b, 0, 100, 0, 4095)
-	  if (seport = 1) {
+	  if (seport == 1) {
       setpwm(1, r)
       setpwm(2, g)
       setpwm(3, b)
-    }else (seport = 2) {
+    }else (seport == 2){
       setpwm(4, r)
       setpwm(5, g)
       setpwm(6, b)
