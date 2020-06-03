@@ -15,31 +15,6 @@ namespace matrixmicro {
   }
 
   init()
-  /**
-  * Button menu
-  */
-  export enum Nbtn{
-    //% block="Button 1"
-    BTN1 = 1,
-    //% block="Button 2"
-    BTN2 = 2,
-  }
-  /**
-  * Button state
-  * Detect the button is pressed or not
-  */
-  //% blockID="microButtonState"  block="Micro %nb| press?"
-  //% blockGap=2 weight=97
-  export function button(nb: Nbtn): number{
-    let PUpin = 0
-    switch (nb) {
-      case 1: PUpin = pins.digitalReadPin(DigitalPin.P5)
-        break;
-      case 2: PUpin = pins.digitalReadPin(DigitalPin.P11)
-        break;
-    }
-    return PUpin
-  }
 
   export enum Nservo{
     //% block="Servo1"
@@ -224,24 +199,24 @@ namespace matrixmicro {
 		S2 = 2,
 	}
   //%block="RGB Led at port %seport R %number|G %number|B %number"
-  export function rgb_led(seport: Led_port = 1, R: number = 0, G: number = 0, B: number = 0): void {
-    if (R > 100)R = 100
-    if (R < 0)R = 0
-    if (G > 100)G = 100
-    if (G < 0)G = 0
-    if (B > 100)B = 100
-    if (B < 0)B = 0
-    R = Math.map(R, 0, 100, 0, 4095)
-    G = Math.map(G, 0, 100, 0, 4095)
-    B = Math.map(B, 0, 100, 0, 4095)
+  export function rgb_led(seport: Led_port = 1, r: number = 0, g:number = 0, b: number = 0): void {
+    if (r > 100)r = 100
+    if (r < 0)r = 0
+    if (g > 100)g = 100
+    if (g < 0)g = 0
+    if (b > 100)b = 100
+    if (b < 0)b = 0
+    r = Math.map(r, 0, 100, 0, 4095)
+    g = Math.map(g, 0, 100, 0, 4095)
+    b = Math.map(b, 0, 100, 0, 4095)
 	  if (seport = 1) {
-      led(1, R)
-      led(2, G)
-      led(3, B)
+      led(1, r)
+      led(2, g)
+      led(3, b)
     }else if (seport = 2) {
-      led(4, R)
-      led(5, G)
-      led(6, B)
+      led(4, r)
+      led(5, g)
+      led(6, b)
     }
   }
 
