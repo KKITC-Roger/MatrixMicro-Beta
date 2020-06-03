@@ -177,9 +177,9 @@ namespace matrixmicro {
     if (g < 0)g = 0
     if (b > 100)b = 100
     if (b < 0)b = 0
-    r = Math.map(r, 0, 100, 0, 4095)
-    g = Math.map(g, 0, 100, 0, 4095)
-    b = Math.map(b, 0, 100, 0, 4095)
+    r = Math.map(r, 0, 100, 0, 2048)
+    g = Math.map(g, 0, 100, 0, 2048)
+    b = Math.map(b, 0, 100, 0, 2048)
 	  if (seport == 1) {
       setpwm(1, r)
       setpwm(2, g)
