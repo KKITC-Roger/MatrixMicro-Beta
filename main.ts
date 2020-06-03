@@ -59,41 +59,41 @@ namespace matrixmicro {
 
     if (mpt == 1) {
       if (apt == 1) {
-        motor(11, speed)
-        motor(13, 4095)
-        motor(14, 0)
+        setpwm(11, speed)
+        setpwm(13, 4095)
+        setpwm(14, 0)
       }
       else if (apt == 2) {
-        motor(11, speed)
-        motor(13, 0)
-        motor(14, 4095)
+        setpwm(11, speed)
+        setpwm(13, 0)
+        setpwm(14, 4095)
       }
       else {
-        motor(11, 0)
-        motor(13, 0)
-        motor(14, 0)
+        setpwm(11, 0)
+        setpwm(13, 0)
+        setpwm(14, 0)
       }
     } else {
       if (apt == 1) {
-        motor(12, speed)
-        motor(15, 4095)
-        motor(16, 0)
+        setpwm(12, speed)
+        setpwm(15, 4095)
+        setpwm(16, 0)
       }
       else if (apt == 2) {
-        motor(12, speed)
-        motor(15, 0)
-        motor(16, 4095)
+        setpwm(12, speed)
+        setpwm(15, 0)
+        setpwm(16, 4095)
       }
       else {
-        motor(12, 0)
-        motor(15, 0)
-        motor(16, 0)
+        setpwm(12, 0)
+        setpwm(15, 0)
+        setpwm(16, 0)
       }
     }
   }
-  function motor(Spin: number, Speed: number) {
-		let TM1 = Speed % 256
-		let TM2 = Speed / 256
+  function setpwm(Spin: number, Value: number) {
+		let TM1 = Value % 256
+		let TM2 = Value / 256
 		let CH = (Spin - 1) * 4 + 8
 		pins.i2cWriteNumber(64, CH * 256 + TM1, NumberFormat.Int16BE, false)
 		pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
@@ -185,13 +185,7 @@ namespace matrixmicro {
     return d * 0.017;
   }
 
-  function led(Spin: number, Speed: number) {
-    let TM1 = Speed % 256
-    let TM2 = Speed / 256
-    let CH = (Spin - 1) * 4 + 8
-    pins.i2cWriteNumber(64, CH * 256 + TM1, NumberFormat.Int16BE, false)
-    pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
-  }
+
   export enum Led_port {
 		//% block="RGB1"
 		S1 = 1,
@@ -211,13 +205,13 @@ namespace matrixmicro {
     g = Math.map(g, 0, 100, 0, 4095)
     b = Math.map(b, 0, 100, 0, 4095)
 	  if (seport = 1) {
-      led(1, r)
-      led(2, g)
-      led(3, b)
+      setpwm(1, r)
+      setpwm(2, g)
+      setpwm(3, b)
     }else (seport = 2) {
-      led(4, r)
-      led(5, g)
-      led(6, b)
+      setpwm(4, r)
+      setpwm(5, g)
+      setpwm(6, b)
     }
   }
 
