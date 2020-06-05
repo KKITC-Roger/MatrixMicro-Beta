@@ -23,9 +23,10 @@ namespace matrixmicro {
     } else if (speed <= 100 && speed > 0){
       md = 1
     } else if (speed < -100) {
-      speed = -100
+      speed = 100
       md = 2
     } else if (speed >= -100 && speed < 0){
+      speed = -speed
       md = 2
     } else if (speed == 0){
       md = 3
