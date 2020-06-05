@@ -1,42 +1,45 @@
-//% weight=0 color=#0066CC icon="\uf2db" block="Micro"
 namespace matrixmicro {
   pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
   pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
 
+  //initial PCA9685 and set PWM frequency to 1526Hz
   function init() {
-  	pins.i2cWriteNumber(64, 16, NumberFormat.Int16BE, false)
-  	pins.i2cWriteNumber(64, 254 * 256 + 3, NumberFormat.Int16BE, false)
-  	pins.i2cWriteNumber(64, 0, NumberFormat.Int16BE, false)
+    pins.i2cWriteNumber(64, 16, NumberFormat.Int16BE, false)
+    pins.i2cWriteNumber(64, 254 * 256 + 3, NumberFormat.Int16BE, false)
+    pins.i2cWriteNumber(64, 0, NumberFormat.Int16BE, false)
   }
   init()
-  export enum Motor_port {
-	  //% block="M1"
-	  M1 = 1,
-    //% block="M2"
-    M2 = 2
-	}
-  export enum Motor_state {
-	  //% block="Forward"
-	  A1 = 1,
-    //% block="Reverse"
-    A2 = 2,
-    //% block="Stop"
-    A3 = 3
-	}
-  //%block="Micro DC Motor %mpt %apt|Speed %number"
+
+  /**
+    DC Motor
+  */
+  //%block="Micro DC Motor %mpt |Speed %number"
   //%weight=99
-	export function microMotor(mpt: Motor_port = 1, apt: Motor_state = 1, speed: number): void {
-		if (speed > 100)speed = 100
-		if (speed < 0)speed = 0
+  export function microMotor(mpt: Motor_port = 1, apt: Motor_state = 1, speed: number): void {
+    let md = 0
+    if (speed>100) {
+      speed = 100
+      md = 1
+    } else if (speed <= 100 && speed > 0){
+      md = 1
+    } else if (speed < -100) {
+      speed = -100
+      md = 2
+    } else if (speed >= -100 && speed < 0){
+      md = 2
+    } else if (speed == 0){
+      md = 3
+    }
+
     speed = Math.map(speed, 0, 100, 0, 4095)
 
     if (mpt == 1) {
-      if (apt == 1) {
+      if (md == 1) {
         setpwm(11, speed)
         setpwm(13, 4095)
         setpwm(14, 0)
       }
-      else if (apt == 2) {
+      else if (md == 2) {
         setpwm(11, speed)
         setpwm(13, 0)
         setpwm(14, 4095)
@@ -47,12 +50,12 @@ namespace matrixmicro {
         setpwm(14, 0)
       }
     } else {
-      if (apt == 1) {
+      if (md == 1) {
         setpwm(12, speed)
         setpwm(15, 4095)
         setpwm(16, 0)
       }
-      else if (apt == 2) {
+      else if (md == 2) {
         setpwm(12, speed)
         setpwm(15, 0)
         setpwm(16, 4095)
@@ -64,71 +67,74 @@ namespace matrixmicro {
       }
     }
   }
-  function setpwm(Spin: number, Value: number) {
-		let TM1 = Value % 256
-		let TM2 = Value / 256
-		let CH = (Spin - 1) * 4 + 8
-		pins.i2cWriteNumber(64, CH * 256 + TM1, NumberFormat.Int16BE, false)
-		pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
-	}
-
-  export enum Nd{
-    //% block="D1"
-    DPort1 = 1,
-    //% block="D2"
-    DPort2 = 2,
+  export enum Motor_port {
+    //% block="M1"
+    M1 = 1,
+    //% block="M2"
+    M2 = 2
   }
+  export enum Motor_state {
+    //% block="Forward"
+    A1 = 1,
+    //% block="Reverse"
+    A2 = 2,
+    //% block="Stop"
+    A3 = 3
+  }
+
+
   /**
-  * Digital Read
-  * Read digital port.
+    Digital Read
+    Read digital port.
   */
   //% blockID="microDIGRead"  block="Micro Digital port %nd"
   //% blockGap=2 weight=96
   export function DRead(nd: Nd): number{
     let DP = 0
-    switch(nd){
+    switch (nd) {
       case 1:
         DP = pins.digitalReadPin(DigitalPin.P12)
         break;
       case 2:
         DP = pins.digitalReadPin(DigitalPin.P14)
         break;
-      }
+    }
     return DP
   }
-
-  export enum Na{
-    //% block="A1"
-    APort1 = 1,
-    //% block="A2"
-    APort2 = 2,
+  export enum Nd {
+    //% block="D1"
+    DPort1 = 1,
+    //% block="D2"
+    DPort2 = 2,
   }
+
   /**
-  * Analog Read
-  * Read analog port.
+    Analog Read
   */
   //% blockID="microANGRead"  block="Micro Analog port %na"
   //% blockGap=2 weight=95
   export function ARead(na: Na): number{
     let AP = 0
-    switch(na){
+    switch (na) {
       case 1:
         AP = pins.analogReadPin(AnalogPin.P1)
         break;
       case 2:
         AP = pins.analogReadPin(AnalogPin.P2)
         break;
-      }
+    }
     return AP
   }
-  export enum Nu{
-    //% block="D1"
-    UPort1 = 1,
-    //% block="D2"
-    UPort2 = 2,
+  export enum Na {
+    //% block="A1"
+    APort1 = 1,
+    //% block="A2"
+    APort2 = 2,
   }
+
+
   /**
-  * Micro Ultrasonic Sensor
+    Micro Ultrasonic Sensor
   */
   //% blockId=ultrasonicSensor block="Micro Ultrasonic Sensor port %nu"
   //% weight=94
@@ -157,17 +163,20 @@ namespace matrixmicro {
     let d = pins.pulseIn(pinE, PulseValue.High, 23000);  // 8 / 340 =
     return d * 0.017;
   }
+  export enum Nu {
+    //% block="D1"
+    UPort1 = 1,
+    //% block="D2"
+    UPort2 = 2,
+  }
 
 
-  export enum Led_port {
-		//% block="RGB1"
-		S1 = 1,
-		//% block="RGB2"
-		S2 = 2,
-	}
+  /**
+    RGB Led
+  */
   //%block="Micro RGB Led port %seport R %number1 G %number2 B %number3"
   //%blockId=rgbled weight=97
-  export function rgb_led(seport: Led_port, r: number = 0, g:number = 0, b: number = 0): void {
+  export function rgb_led(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
     if (r > 100)r = 100
     if (r < 0)r = 0
     if (g > 100)g = 100
@@ -177,42 +186,51 @@ namespace matrixmicro {
     r = Math.map(r, 0, 100, 0, 2048)
     g = Math.map(g, 0, 100, 0, 2048)
     b = Math.map(b, 0, 100, 0, 2048)
-	  if (seport == 1) {
+    if (seport == 1) {
       setpwm(1, r)
       setpwm(2, g)
       setpwm(3, b)
-    }else if(seport == 2){
+    } else if (seport == 2) {
       setpwm(4, r)
       setpwm(5, g)
       setpwm(6, b)
     }
   }
-  export enum Nservo{
-    //% block="Servo1"
-    SPort1 = 1,
-    //% block="Servo2"
-    Sport2 = 2,
+  export enum Led_port {
+    //% block="RGB1"
+    S1 = 1,
+    //% block="RGB2"
+    S2 = 2,
   }
 
-  /**
-  * Servo movement
-  * choose one of the servo and set the angle.
+  function setpwm(Spin: number, Value: number) {
+    let TM1 = Value % 256
+    let TM2 = Value / 256
+    let CH = (Spin - 1) * 4 + 8
+    pins.i2cWriteNumber(64, CH * 256 + TM1, NumberFormat.Int16BE, false)
+    pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
+  }
+
+    /**
+    Servo movement
+    choose one of the servo and set the angle.
   */
   //% blockID="microServo"  block="Micro RC Motor %ns|Angle %angle"
   //% blockGap=2 weight=98
   export function servo(ns: Nservo, angle: number): void{
-    if(angle>180)angle = 180
-    if(angle<0)angle = 0
+    if (angle > 180)angle = 180
+    if (angle < 0)angle = 0
     if (ns == 1) {
       pins.servoWritePin(AnalogPin.P8, angle)
-    }else if(ns == 2){
+    } else if (ns == 2) {
       pins.servoWritePin(AnalogPin.P16, angle)
     }
-    // let TS1 = (angle / 180 * FullScaleBit + StartBit) % 256
-    // let TS2 = (angle / 180 * FullScaleBit + StartBit) / 256
-    // let CH = (ns - 1) * 4 + 8
-    // pins.i2cWriteNumber(64, CH * 256 + TS1, NumberFormat.Int16BE, false)
-    // pins.i2cWriteNumber(64, (CH + 1) * 256 + TS2, NumberFormat.Int16BE, false)
+  }
+  export enum Nservo {
+    //% block="Servo1"
+    SPort1 = 1,
+    //% block="Servo2"
+    Sport2 = 2,
   }
   namespace servos {
     //% fixedInstances
@@ -233,7 +251,7 @@ namespace matrixmicro {
       }
 
       /**
-      * Set the servo angle
+        Set the servo angle
       */
       //% weight=100 help=servos/set-angle
       //% blockId=servoservosetangle block="set %servo angle to %degrees=protractorPicker °"
@@ -252,24 +270,24 @@ namespace matrixmicro {
       protected internalSetAngle(angle: number): void {
       }
       /**
-      * Gets the minimum angle for the servo
+        Gets the minimum angle for the servo
       */
       public get minAngle() {
         return this._minAngle;
       }
 
       /**
-      * Gets the maximum angle for the servo
+        Gets the maximum angle for the servo
       */
       public get maxAngle() {
         return this._maxAngle;
       }
 
       /**
-       * Set the possible rotation range angles for the servo between 0 and 180
-       * @param minAngle the minimum angle from 0 to 90
-       * @param maxAngle the maximum angle from 90 to 180
-       */
+         Set the possible rotation range angles for the servo between 0 and 180
+         @param minAngle the minimum angle from 0 to 90
+         @param maxAngle the maximum angle from 90 to 180
+      */
       //% help=servos/set-range
       //% blockId=servosetrange block="set %servo range from %minAngle to %maxAngle"
       //% minAngle.min=0 minAngle.max=90
@@ -286,9 +304,9 @@ namespace matrixmicro {
       }
 
       /**
-       * Set a servo stop mode so it will stop when the rotation angle is in the neutral position, 90 degrees.
-       * @param on true to enable this mode
-       */
+         Set a servo stop mode so it will stop when the rotation angle is in the neutral position, 90 degrees.
+         @param on true to enable this mode
+      */
       //% help=servos/set-stop-on-neutral
       //% blockId=servostoponneutral block="set %servo stop on neutral %enabled"
       //% enabled.shadow=toggleOnOff
@@ -310,15 +328,12 @@ namespace matrixmicro {
         super();
         this._pin = pin;
       }
-
       protected internalSetAngle(angle: number): void {
         this._pin.servoWrite(angle);
       }
-
       protected internalSetPulse(micros: number): void {
         this._pin.servoSetPulse(micros);
       }
-
       protected internalStop() {
         this._pin.digitalWrite(false);
       }
