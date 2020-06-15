@@ -1,8 +1,6 @@
 {
     "matrixmicro|block": "工具",
-    "matrixmicro.areaOfRectangle|block": "長方形面積 長 %length|寬 %width",
-    "matrixmicro.ledOfRectangle|block": "LED顯示長方形面積 長 %length|寬 %width",
-    "matrixmicro.motor|block":"Micro 直流馬達 %nm|速度 %speed",
+    "matrixmicro.microMotor|block":"Micro 直流馬達 %mpt |速度 %number",
     "matrixmicro.servo|block":"Micro 伺服馬達 %ns|角度 %angle",
-    "matrixmicro.microButtonState|block":" %nb| 按下?",    
+    "matrixmicro.rgb_led|block":"Micro RGB Led 編號 %seport 紅 %number1 綠 %number2 藍 %number3",
 }

@@ -177,7 +177,7 @@ namespace matrixmicro {
     RGB Led
   */
   //%block="Micro RGB Led port %seport R %number1 G %number2 B %number3"
-  //%blockId=rgbled weight=97
+  //%blockId="rgbled" weight=97
   export function rgb_led(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
     if (r > 100)r = 100
     if (r < 0)r = 0
