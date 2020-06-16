@@ -16,7 +16,7 @@ namespace matrixmicro {
   */
   //%block="Micro DC Motor %mpt |Speed %speed"
   //%weight=99
-  export function microMotor(mpt: Motor_port = 1, speed: number): void {
+  export function microMotor(mpt: Motor_port = 1, speed: number = 0): void {
     let md = 0
     if (speed>100) {
       speed = 100
