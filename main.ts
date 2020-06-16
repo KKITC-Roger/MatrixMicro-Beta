@@ -89,8 +89,8 @@ namespace matrixmicro {
     Digital Read
     Read digital port.
   */
-  //% blockID="microDIGRead"  block="Micro Digital port %nd"
-  //% blockGap=2 weight=96
+  //% block="Micro Digital port %nd"
+  //% weight=96
   export function DRead(nd: Nd): number{
     let DP = 0
     switch (nd) {
@@ -113,8 +113,8 @@ namespace matrixmicro {
   /**
     Analog Read
   */
-  //% blockID="microANGRead"  block="Micro Analog port %na"
-  //% blockGap=2 weight=95
+  //% block="Micro Analog port %na"
+  //% weight=95
   export function ARead(na: Na): number{
     let AP = 0
     switch (na) {
@@ -138,7 +138,7 @@ namespace matrixmicro {
   /**
     Micro Ultrasonic Sensor
   */
-  //% blockId=ultrasonicSensor block="Micro Ultrasonic Sensor port %nu"
+  //% block="Micro Ultrasonic Sensor port %nu"
   //% weight=94
   export function microUltrasonicSensor(nu: Nu): number {
     let pinT = DigitalPin.P0
@@ -176,8 +176,8 @@ namespace matrixmicro {
   /**
     RGB Led
   */
-  //%block="Micro RGB Led port %seport R %r G %g B %b"
-  //%blockId="rgbled" weight=97
+  //% block="Micro RGB Led port %seport R %r G %g B %b"
+  //% weight=97
   export function microRGB(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
     if (r > 100)r = 100
     if (r < 0)r = 0
@@ -217,8 +217,8 @@ namespace matrixmicro {
     Servo movement
     choose one of the servo and set the angle.
   */
-  //% blockID="microServo"  block="Micro RC Motor %ns|Angle %angle"
-  //% blockGap=2 weight=98
+  //% block="Micro RC Motor %ns|Angle %angle"
+  //% weight=98
   export function microServo(ns: Nservo, angle: number): void{
     if (angle > 180)angle = 180
     if (angle < 0)angle = 0
