@@ -1,4 +1,4 @@
 {
     "matrixmicro|block": "Matrix Micro",
-    "matrixmicro.microMotor|block" : "Micro 直流馬達 %mpt |速度 %number",
+    "matrixmicro.microMotor|block" : "Micro 直流馬達 %mpt |速度 %speed",
 }

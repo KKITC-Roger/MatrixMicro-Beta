@@ -14,7 +14,7 @@ namespace matrixmicro {
   /**
     DC Motor
   */
-  //%block="Micro DC Motor %mpt |Speed %number"
+  //%block="Micro DC Motor %mpt |Speed %speed"
   //%weight=99
   export function microMotor(mpt: Motor_port = 1, speed: number): void {
     let md = 0
@@ -176,7 +176,7 @@ namespace matrixmicro {
   /**
     RGB Led
   */
-  //%block="Micro RGB Led port %seport R %number1 G %number2 B %number3"
+  //%block="Micro RGB Led port %seport R %r G %g B %b"
   //%blockId="rgbled" weight=97
   export function rgb_led(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
     if (r > 100)r = 100
@@ -213,7 +213,7 @@ namespace matrixmicro {
     pins.i2cWriteNumber(64, (CH + 1) * 256 + TM2, NumberFormat.Int16BE, false)
   }
 
-    /**
+  /**
     Servo movement
     choose one of the servo and set the angle.
   */
