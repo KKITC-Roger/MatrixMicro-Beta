@@ -178,7 +178,7 @@ namespace matrixmicro {
   */
   //%block="Micro RGB Led port %seport R %r G %g B %b"
   //%blockId="rgbled" weight=97
-  export function rgb_led(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
+  export function microRGB(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
     if (r > 100)r = 100
     if (r < 0)r = 0
     if (g > 100)g = 100
@@ -219,7 +219,7 @@ namespace matrixmicro {
   */
   //% blockID="microServo"  block="Micro RC Motor %ns|Angle %angle"
   //% blockGap=2 weight=98
-  export function servo(ns: Nservo, angle: number): void{
+  export function microServo(ns: Nservo, angle: number): void{
     if (angle > 180)angle = 180
     if (angle < 0)angle = 0
     if (ns == 1) {
