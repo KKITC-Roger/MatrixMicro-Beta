@@ -1,5 +1,5 @@
 {
-  
+    "matrixmicro|block": "Matrix Micro",
     "matrixmicro.microMotor|block" : "Micro 直流馬達 %mpt |速度 %speed",
     "matrixmicro.microServo|block" : "Micro 伺服馬達 %ns|角度 %angle",
     "matrixmicro.microRGB|block" : "Micro RGB Led 編號 %seport 紅 %number1 綠 %number2 藍 %number3",
