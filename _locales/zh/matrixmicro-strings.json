@@ -1,9 +1,9 @@
 {
-    "matrixmicro|block": "Micro",
-    "matrixmicro.micromotor|block": "Micro 直流馬達 %mpt |速度 %speed (0~100)",
-    "matrixmicro.microServo|block": "Micro 伺服馬達 %ns|角度 %angle",
-    "matrixmicro.microRGB|block": "Micro RGB Led 編號 %seport 紅 %number1 綠 %number2 藍 %number3",
-    "matrixmicro.microUltrasonicSensor|block": "Micro 超音波感測器 %nu",
-    "matrixmicro.ARead|block": "Micro 類比腳位插槽 %na",
-    "matrixmicro.DRead|block": "Micro 數位腳位插槽 %nd"
-  }
+  "matrixmicro|block": "Micro",
+  "matrixmicro.micromotor|block": "Micro 直流馬達 %mpt |速度 %speed",
+  "matrixmicro.microServo|block": "Micro 伺服馬達 %ns|角度 %angle",
+  "matrixmicro.microRGB|block": "Micro RGB Led 編號 %seport 紅 %number1 綠 %number2 藍 %number3",
+  "matrixmicro.microUltrasonicSensor|block": "Micro 超音波感測器 %nu",
+  "matrixmicro.ARead|block": "Micro 類比腳位插槽 %na",
+  "matrixmicro.DRead|block": "Micro 數位腳位插槽 %nd"
+}
