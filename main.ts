@@ -1,4 +1,4 @@
-//% weight=0 color=#CC6600 icon="\uf2db" block="Matrix Micro"
+//% weight=0 color=#FFDD00 icon="\uf2db" block="Matrix Micro"
 namespace matrixmicro {
   pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
   pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
@@ -176,7 +176,7 @@ namespace matrixmicro {
   /**
     RGB Led
   */
-  //% block="Micro RGB Led port %seport |R %r |G %g |B %b"
+  //% block="Micro RGB Led port %seport R %r G %g B %b"
   //% weight=97 %blockID="micro_rgb"
   export function micro_rgb(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
     if (r > 100)r = 100
