@@ -1,4 +1,4 @@
-//% weight=0 color=#CCAA00 icon="\uf2db" block="Matrix Micro"
+//% weight=0 color=#0066CC icon="\uf2db" block="Micro"
 namespace micro{
   pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
   pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
