@@ -16,7 +16,7 @@ namespace matrixmicro {
   */
   //%block="Micro DC Motor %mpt |Speed %speed"
   //%weight=99 %blockID="microMotor"
-  export function micromotor(mpt: Motor_port = 1, speed: number = 0): void {
+  export function micro_motor(mpt: Motor_port = 1, speed: number = 0): void {
     let md = 0
     if (speed>100) {
       speed = 100
@@ -91,7 +91,7 @@ namespace matrixmicro {
   */
   //% block="Micro Digital port %nd"
   //% weight=96
-  export function DRead(nd: Nd): number{
+  export function dread(nd: Nd): number{
     let DP = 0
     switch (nd) {
       case 1:
@@ -115,7 +115,7 @@ namespace matrixmicro {
   */
   //% block="Micro Analog port %na"
   //% weight=95
-  export function ARead(na: Na): number{
+  export function aread(na: Na): number{
     let AP = 0
     switch (na) {
       case 1:
@@ -140,7 +140,7 @@ namespace matrixmicro {
   */
   //% block="Micro Ultrasonic Sensor port %nu"
   //% weight=94
-  export function microUltrasonicSensor(nu: Nu): number {
+  export function micro_ultrasonicsensor(nu: Nu): number {
     let pinT = DigitalPin.P0
     let pinE = DigitalPin.P1
     switch (nu) {
@@ -178,7 +178,7 @@ namespace matrixmicro {
   */
   //% block="Micro RGB Led port %seport R %r G %g B %b"
   //% weight=97
-  export function microRGB(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
+  export function micro_rgb(seport: Led_port, r: number = 0, g: number = 0, b: number = 0): void {
     if (r > 100)r = 100
     if (r < 0)r = 0
     if (g > 100)g = 100
@@ -219,7 +219,7 @@ namespace matrixmicro {
   */
   //% block="Micro RC Motor %ns|Angle %angle"
   //% weight=98
-  export function microServo(ns: Nservo, angle: number): void{
+  export function micro_servo(ns: Nservo, angle: number): void{
     if (angle > 180)angle = 180
     if (angle < 0)angle = 0
     if (ns == 1) {
