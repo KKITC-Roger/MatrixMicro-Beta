@@ -1,5 +1,5 @@
 {
-  "micro|block": "Micro",
+  "micro|block": "Matrix Micro",
   "micro.micro_motor|block": "Micro 直流馬達 %mpt 速度 %speed",
   "micro.dread|block": "Micro 數位插槽 %nd",
   "micro.aread|block": "Micro 類比插槽 %na",
