@@ -14,7 +14,7 @@ namespace micro{
   /**
     DC Motor
   */
-  //%block="Micro DC Motor %mpt |Speed %speed"
+  //%block="Micro DC Motor %mpt Speed %speed"
   //%weight=99 %blockID="micro_motor"
   export function micro_motor(mpt: Motor_port = 1, speed: number = 0): void {
     let md = 0
@@ -75,15 +75,6 @@ namespace micro{
     //% block="M2"
     M2 = 2
   }
-  export enum Motor_state {
-    //% block="Forward"
-    A1 = 1,
-    //% block="Reverse"
-    A2 = 2,
-    //% block="Stop"
-    A3 = 3
-  }
-
 
   /**
     Digital Read
@@ -217,7 +208,7 @@ namespace micro{
     Servo movement
     choose one of the servo and set the angle.
   */
-  //% block="Micro RC Motor %ns|Angle %angle"
+  //% block="Micro RC Motor %ns Angle %angle"
   //% weight=98 %blockID="micro_servo"
   export function micro_servo(ns: Nservo, angle: number): void{
     if (angle > 180)angle = 180
