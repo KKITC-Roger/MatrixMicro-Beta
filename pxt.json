@@ -10,6 +10,6 @@
     "files": [
         "README.md",
         "main.ts",
-        "_locales/zh/micro-strings.json"
+        "_locales/zh-tw/micro-strings.json"
     ]
 }
