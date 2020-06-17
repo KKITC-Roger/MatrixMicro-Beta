@@ -4,7 +4,7 @@
     "description": "Makecode extension for Matrix Micro!",
     "public": true,
     "license": "MIT",
-        "dependencies": {
+    "dependencies": {
         "core": "*"
     },
     "files": [
