@@ -5,5 +5,5 @@
   "micro.aread|block": "Micro 類比插槽 %na",
   "micro.micro_ultrasonicsensor|block": "Micro 超音波感測器 %nu",
   "micro.micro_rgb|block": "Micro RGB Led 編號 %seport 紅 %r 綠 %g 藍 %b",
-  "micro.micro_servo|block": "Micro 伺服馬達 %ns角度 %angle",
+  "micro.micro_servo|block": "Micro 伺服馬達 %ns角度 %angle"
 }
